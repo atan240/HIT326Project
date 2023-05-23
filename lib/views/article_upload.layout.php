@@ -1,19 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <?php
 require PARTIALS . "/site.header.layout.php";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<h1>Create Article</h1>
-<form action='index.php' method='POST'>
- <input type='hidden' name='_method' value='post' />
- <label for='name'>Title</label>
- <input type='text' id='Title' name='title' />
- <input type='submit' value='Submit article' />
-</form>
-<?php
-require PARTIALS . "/site.footer.layout.php";
-?>
-</body>
-</html>
 
+<body>
+    <h1>Create Article</h1>
+    <form id="my-form" class="form-container" action='index.php' method="POST" style="margin-left: 20px;">
+        <div><input type='hidden' name='_method' value='post' /></div>
+        <div><label for='title'>Title</label></div>
+        <div><input type='text' id='news_title' name='news_title' /></div>
+        <div><label for='journalist'>Journalist ID</label></div>
+        <div><input type='text' id='user_id' name='user_id' /></div>
+        <div><label for='news'>Article Content</label></div>
+        <div><textarea id="news_body" name="content" placeholder="Enter content here" style="height:200px"></textarea></div>
+        <div><input type='submit' value='Submit article' /></div>
+    </form>
+    <?php
+    require PARTIALS . "/site.footer.layout.php";
+    ?>
+</body>
+
+</html>

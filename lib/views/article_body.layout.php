@@ -1,8 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
 <?php
 require PARTIALS . "/site.header.layout.php";
 ?>
-<!DOCTYPE html>
-<html lang="en">
+
 <main>
     <article>
         <header>
@@ -16,10 +17,36 @@ require PARTIALS . "/site.header.layout.php";
         echo "[Image]";
         echo "<p>[Article body text]</p>";
         ?>
+
+        <?php
+        //Print any errors 
+        if (!empty($errors)) {
+            echo "<p>We have errors</p>";
+            echo "<ul>";
+            foreach ($errors as $error) {
+                echo "<li>{$error}</li>";
+            }
+            echo "</ul>";
+        }
+
+        //Print the list of players
+        if (!empty($list)) {
+            foreach ($list as $player) {
+                $fname = htmlspecialchars($player['user_FN'], ENT_QUOTES, 'UTF-8');
+                $sname = htmlspecialchars($player['user_LN'], ENT_QUOTES, 'UTF-8');
+                $role = htmlspecialchars($player['user_role'], ENT_QUOTES, 'UTF-8');
+                echo "<h2>{$role}</h2>";
+                echo "<p>{$fname}, {$sname}</p>";
+            }
+        } else {
+            echo "<h2>List is empty</h2>";
+        }
+        ?>
     </article>
 </main>
 <?php
 require PARTIALS . "/site.footer.layout.php";
 ?>
 </body>
+
 </html>
