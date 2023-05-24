@@ -7,7 +7,7 @@ require PARTIALS . "/site.header.layout.php";
 
 <body>
     <h1>Create Article</h1>
-    <form id="my-form" class="form-container" action='index.php' method="POST" style="margin-left: 20px;">
+    <form id="my-form" class="form-container" action='index.php' method="POST">
         <div><input type='hidden' name='_method' value='post' /></div>
         <div><label for='title'>Title</label></div>
         <div><input type='text' id='news_title' name='news_title' /></div>
