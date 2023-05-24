@@ -1,3 +1,5 @@
+CREATE DATABASE newspaper_db;
+
 USE newspaper_db;
 
 DROP TABLE IF EXISTS Article_Content, Article_Tags, Comments, Tags, Users;
