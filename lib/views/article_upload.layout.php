@@ -14,7 +14,7 @@ require PARTIALS . "/site.header.layout.php";
         <div><label for='journalist'>Journalist ID</label></div>
         <div><input type='text' id='user_id' name='user_id' /></div>
         <div><label for='news'>Article Content</label></div>
-        <div><textarea id="news_body" name="content" placeholder="Enter content here" style="height:200px"></textarea></div>
+        <div><textarea id="news_body" name="news_body" placeholder="Enter content here" style="height:200px"></textarea></div>
         <div><input type='submit' value='Submit article' /></div>
     </form>
     <?php

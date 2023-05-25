@@ -4,13 +4,14 @@ DEFINE("LIB",$_SERVER['DOCUMENT_ROOT']."/lib");
 DEFINE("VIEWS",LIB."/views");
 DEFINE("PARTIALS",VIEWS."/partials");
 
-
+//Route to login page
 if(isset($_GET['login'])){
     // require VIEWS.'/login.layout.php';
     require VIEWS.'/db_error.html.php';
 	exit();
 }
 
+//Route to article 1 page
 if(isset($_GET['article1'])){
     $errors = array();
     require 'db.php';  
@@ -52,7 +53,7 @@ if(isset($_POST['_method']) && $_POST['_method']=='post'){
           $user_id = $_POST['user_id'];
           $news_body = $_POST['news_body'];
           try{   
-            $query = "INSERT INTO article_content (news_title,user_id,news_body) VALUES (?,?,?)";
+            $query = "INSERT INTO article_content (news_title,user_id,news_body, news_timestamp) VALUES (?,?,?,NOW())";
             $statement = $db->prepare($query);
             $binding = array($news_title,$user_id,$news_body);
             $statement -> execute($binding);
@@ -75,5 +76,5 @@ if(isset($_POST['_method']) && $_POST['_method']=='post'){
  
  }
 
-
+//Route to homepage
 require VIEWS.'/site_home.layout.php';

@@ -6,18 +6,6 @@ require PARTIALS . "/site.header.layout.php";
 
 <main>
     <article>
-        <header>
-            <?php
-            echo "<h1> [Article Title] </h1>";
-            echo "<p class='meta-data'>By Jane Doe | 7/15/2021 | 10:00 AM</p>";
-            // require VIEWS."/{$content}.php"
-            ?>
-        </header>
-        <?php
-        echo "[Image]";
-        echo "<p>[Article body text]</p>";
-        ?>
-
         <?php
         //Print any errors 
         if (!empty($errors)) {
@@ -29,17 +17,36 @@ require PARTIALS . "/site.header.layout.php";
             echo "</ul>";
         }
 
-        //Print the list of players
-        if (!empty($list)) {
-            foreach ($list as $player) {
-                $fname = htmlspecialchars($player['user_FN'], ENT_QUOTES, 'UTF-8');
-                $sname = htmlspecialchars($player['user_LN'], ENT_QUOTES, 'UTF-8');
-                $role = htmlspecialchars($player['user_role'], ENT_QUOTES, 'UTF-8');
-                echo "<h2>{$role}</h2>";
-                echo "<p>{$fname}, {$sname}</p>";
+        //Select statement retrieves values from "article_content" table as well as the journalist's full name from the "users" table
+        if ($statement = $db->prepare("SELECT ac.article_ID, ac.news_title, ac.news_body, ac.news_timestamp, u.user_FN, u.user_LN, ac.image_url 
+        FROM article_content ac 
+        JOIN users u on u.user_ID = ac.user_ID
+        WHERE ac.article_ID = ?")) {
+
+            //Value in the binding array specifies the article ID
+            $binding = array('2');
+
+            $statement->execute($binding);
+
+            $result = $statement->fetchall(PDO::FETCH_ASSOC);
+
+            //Check for results
+            if (!empty($result)) {
+                foreach ($result as $item) {
+                    $news_title = htmlspecialchars($item['news_title'], ENT_QUOTES, 'UTF-8');
+                    $news_body = htmlspecialchars($item['news_body'], ENT_QUOTES, 'UTF-8');
+                    $news_timestamp = htmlspecialchars($item['news_timestamp'], ENT_QUOTES, 'UTF-8');
+                    $user_FN = htmlspecialchars($item['user_FN'], ENT_QUOTES, 'UTF-8');
+                    $user_LN = htmlspecialchars($item['user_LN'], ENT_QUOTES, 'UTF-8');
+                    $image_url = htmlspecialchars($item['image_url'], ENT_QUOTES, 'UTF-8');
+                    echo "<header><h1>$news_title</h1>"; 
+                    echo "<p class='meta-data'>$user_FN $user_LN  |  $news_timestamp</p></header>"; 
+                    echo "<p><center><img src='$image_url'></center></p>"; 
+                    echo "<p>$news_body</p>"; 
+                }
+            } else {
+                require VIEWS.'/db_error.html.php';
             }
-        } else {
-            echo "<h2>List is empty</h2>";
         }
         ?>
     </article>
