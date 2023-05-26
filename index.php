@@ -85,7 +85,7 @@ if (isset($_POST['_method']) && $_POST['_method'] == 'post') {
             require VIEWS . '/db_error.html.php';
             exit();
         }
-        header('Location: index.php?');
+        header('Location: index.php');
 
         exit();
     } else {
@@ -94,6 +94,5 @@ if (isset($_POST['_method']) && $_POST['_method'] == 'post') {
         exit();
     }
 }
-
 //Route to homepage
 require VIEWS . '/site_home.layout.php';
