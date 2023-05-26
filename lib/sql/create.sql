@@ -21,7 +21,7 @@ CREATE TABLE Article_Content (
 
 
 CREATE TABLE Article_Tags (
-  tag_ID INT(10) AUTO_INCREMENT,
+  tag_ID INT(10),
   article_ID INT(10),
   FOREIGN KEY (tag_ID) REFERENCES Tags(tag_ID),
   FOREIGN KEY (article_ID) REFERENCES Article_Content(article_ID)
@@ -41,8 +41,8 @@ CREATE TABLE Comments (
 
 
 CREATE TABLE Tags (
-  tag_ID INT(10) PRIMARY KEY NOT NULL,
-  tag_name VARCHAR(255)
+  tag_ID INT(10) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  tag_name VARCHAR(255) UNIQUE
 );
 
 

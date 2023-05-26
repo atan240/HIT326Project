@@ -24,7 +24,7 @@ require PARTIALS . "/site.header.layout.php";
         WHERE ac.article_ID = ?")) {
 
             //Value in the binding array specifies the article ID
-            $binding = array('2');
+            $binding = array('17');
 
             $statement->execute($binding);
 
