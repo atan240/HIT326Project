@@ -11,7 +11,7 @@ if (isset($_GET['login'])) {
     exit();
 }
 
-//Route to article 1 page
+//Route to article page based on id of article
 // if (isset($_GET['article1'])) {
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $errors = array();
