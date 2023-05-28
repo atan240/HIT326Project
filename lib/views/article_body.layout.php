@@ -18,7 +18,6 @@ require PARTIALS . "/site.header.layout.php";
         require PARTIALS . '/article.a.body.php';
         require PARTIALS . '/article.b.tags.php';
         require PARTIALS . '/article.c.commentbox.php';
-        require PARTIALS . '/article.d.comments.php';
     }
 
     ?>

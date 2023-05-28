@@ -1,3 +1,5 @@
+<!-- Return article tags -->
+
 <?php
 //Show article tags
 if ($statement = $db->prepare("SELECT tags.tag_name FROM article_content JOIN article_tags ON article_content.article_ID = article_tags.article_ID JOIN tags ON article_tags.tag_ID = tags.tag_ID WHERE article_content.article_ID = ?")) {

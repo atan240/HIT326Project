@@ -1,3 +1,5 @@
+<!-- Form component for "article.c.commentbox.php" -->
+
 <?php
 $articleID = $_GET['id'];
 echo "<form id='comment-box' class='form-container' action='index.php?id=$articleID' method='POST'>

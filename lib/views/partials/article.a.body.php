@@ -1,3 +1,5 @@
+<!-- Retrieves the main article body. -->
+
 <?php
 //Select statement retrieves values from "article_content" table as well as the journalist's full name from the "users" table
 // if (isset($_GET['id']) && !empty($_GET['id'])) {
