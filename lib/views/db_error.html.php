@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-require PARTIALS . "/site.header.layout.php";
-?>
+
 
 <body>
 <h1>Database error</h1>

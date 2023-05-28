@@ -12,7 +12,8 @@ if (isset($_GET['login'])) {
 }
 
 //Route to article 1 page
-if (isset($_GET['article1'])) {
+// if (isset($_GET['article1'])) {
+if (isset($_GET['id']) && !empty($_GET['id'])) {
     $errors = array();
     require 'db.php';
     if (!$db) {
@@ -21,9 +22,10 @@ if (isset($_GET['article1'])) {
     }
     $list = null;
     try {
-        $query = "SELECT user_FN,user_LN,user_role FROM users";
+        $articleID = $_GET['id']; // Get the 'id' parameter from the URL
+        $query = "SELECT article_ID FROM article_content WHERE article_ID = ?";
         $statement = $db->prepare($query);
-        $statement->execute();
+        $statement->execute(array($articleID));
         $list = $statement->fetchall(PDO::FETCH_ASSOC);
         require VIEWS . '/article_body.layout.php';
     } catch (PDOException $e) {
