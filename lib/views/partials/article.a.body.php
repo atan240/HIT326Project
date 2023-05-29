@@ -37,3 +37,4 @@ if ($statement = $db->prepare("SELECT ac.article_ID, ac.news_title, ac.news_body
         require VIEWS . '/db_error.html.php';
     }
 }
+?>
