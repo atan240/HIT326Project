@@ -96,5 +96,26 @@ if (isset($_POST['_method']) && $_POST['_method'] == 'post') {
         exit();
     }
 }
+
+
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+    $errors = array();
+    require 'db.php';
+    if (!$db) {
+        require VIEWS . '/db_error.html.php';
+        exit();
+    }
+    $list = null;
+    try {
+        require PARTIALS . '/search.results.php';
+    } catch (PDOException $e) {
+        $errors[] = "Statement error because: {$e->getMessage()}";
+        require 'db_error.html.php';
+        exit();
+    }
+    exit();
+}
+
+
 //Route to homepage
 require VIEWS . '/site_home.layout.php';
