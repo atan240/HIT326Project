@@ -14,7 +14,7 @@
 				<li><a href="?login">Login</a></li>
 
 				<div class="search-container">
-					<form method="GET" action="index.php?search=<?php $_GET['search'] ?>">
+					<form method="GET" action="index.php">
 						<input type="text" name="search" placeholder="Search">
 						<input type="submit" value="Go">
 					</form>
