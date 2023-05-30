@@ -25,13 +25,16 @@ WHERE c.article_ID = ?
                 $created_at = htmlspecialchars($item['created_at'], ENT_QUOTES, 'UTF-8');
                 $username = htmlspecialchars($item['username'], ENT_QUOTES, 'UTF-8');
 
-                echo "<div class = 'comment-box'><p class='username'>$username<p class='meta-data'>$created_at</p></p>$comment_body</div>";
+                // Set username as Anonymous if user not logged in when posting a comment
+                $username = $username ? $username : "Anonymous";
+                echo "<div class='comment-box'><p class='username'>$username</p><p class='meta-data'>$created_at</p>$comment_body</div>";
+                
             }
         } else {
-            // Handle database errors
             echo "No comments. Be the first to comment!";
         }
     } else {
+        // Handle database errors
         require VIEWS . '/db_error.html.php';
     }
 } else {

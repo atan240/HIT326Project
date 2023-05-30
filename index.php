@@ -41,6 +41,7 @@ if (isset($_GET['upload'])) {
     $list = null;
     try {
         require VIEWS . '/article_upload.layout.php';
+        require MODELS . '/article_upload.php';
     } catch (PDOException $e) {
         $errors[] = "Statement error because: {$e->getMessage()}";
         require VIEWS . '/db_error.html.php';

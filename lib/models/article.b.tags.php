@@ -16,8 +16,9 @@ if ($statement = $db->prepare("SELECT tags.tag_name FROM article_content JOIN ar
     if (!empty($result)) {
         foreach ($result as $item) {
             $tags = htmlspecialchars($item['tag_name'], ENT_QUOTES, 'UTF-8');
-            echo "<p>#$tags</p>";
+            echo "<p><a href = 'http://localhost/index.php?search=$tags'>#$tags</a></p>";
         }
+        
     } else {
         require VIEWS . '/db_error.html.php';
     }

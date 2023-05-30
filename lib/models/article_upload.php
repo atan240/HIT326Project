@@ -11,7 +11,10 @@ if (isset($_POST['_method']) && $_POST['_method'] == 'post') {
         $user_id = $_POST['user_id'];
         $image_url = htmlspecialchars($_POST['image_url'], ENT_QUOTES);
         $news_body = htmlspecialchars($_POST['news_body'], ENT_QUOTES);
-        $tag_name_array = explode(", ", $_POST['tag_name']);
+        // $tag_name_array = explode(", ", $_POST['tag_name']);
+        $tag_name = htmlspecialchars($_POST['tag_name'], ENT_QUOTES);
+        $tag_name = str_replace(' ', '', $tag_name); // Remove whitespaces
+        $tag_name_array = explode(',', $tag_name);
         try {
             //Insert into article_content table
             $query1 = "INSERT INTO article_content (news_title,user_id,image_url, news_body, news_timestamp) VALUES (?,?,?,?,NOW())";
@@ -32,12 +35,22 @@ if (isset($_POST['_method']) && $_POST['_method'] == 'post') {
                 $tagIDs[] = $db->lastInsertId();
             }
 
-            //Insert into "article_tags" intermediate table
-            foreach ($tagIDs as $tagID) {
-                $query3 = "INSERT INTO article_tags (article_ID, tag_ID) VALUES (?, ?)";
+            // SELECT tag_ID from tags table and INSERT with article_ID into intermediate table "article_tags"
+            foreach ($tag_name_array as $tag_name) {
+                $tag_name = htmlspecialchars(trim($tag_name), ENT_QUOTES);
+                $query3 = "SELECT tag_ID FROM tags WHERE tag_name = ?";
                 $statement = $db->prepare($query3);
-                $statement->execute([$articleID, $tagID]);
+                $statement->execute([$tag_name]);
+                $result = $statement->fetch(PDO::FETCH_ASSOC);
+            
+                if ($result) {
+                    $tagID = $result['tag_ID'];
+                    $query4 = "INSERT INTO article_tags (article_ID, tag_ID) VALUES (?, ?)";
+                    $statement = $db->prepare($query4);
+                    $statement->execute([$articleID, $tagID]);
+                }
             }
+
         } catch (PDOException $e) {
             $errors[] = "Statement error because: {$e->getMessage()}";
             require VIEWS . '/db_error.html.php';
