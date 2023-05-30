@@ -6,8 +6,7 @@ DEFINE("PARTIALS", VIEWS . "/partials");
 
 //Route to login page
 if (isset($_GET['login'])) {
-    // require VIEWS.'/login.layout.php';
-    require VIEWS . '/db_error.html.php';
+    require VIEWS . '/login/layout.php';
     exit();
 }
 
