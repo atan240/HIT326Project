@@ -29,7 +29,7 @@ WHERE c.article_ID = ?
             }
         } else {
             // Handle database errors
-            require VIEWS . '/db_error.html.php';
+            echo "No comments. Be the first to comment!";
         }
     } else {
         require VIEWS . '/db_error.html.php';

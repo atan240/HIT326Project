@@ -15,9 +15,9 @@ require PARTIALS . "/site.header.layout.php";
         }
         echo "</ul>";
     } else {
-        require PARTIALS . '/article.a.body.php';
-        require PARTIALS . '/article.b.tags.php';
-        require PARTIALS . '/article.c.commentbox.php';
+        require MODELS . '/article.a.body.php';
+        require MODELS . '/article.b.tags.php';
+        require MODELS . '/article.c.commentbox.php';
     }
 
     ?>

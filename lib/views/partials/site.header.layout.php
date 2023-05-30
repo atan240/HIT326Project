@@ -1,7 +1,7 @@
 <head>
 	<meta charset='utf-8' />
 	<title>Single Column News Website</title>
-	<link rel="stylesheet" href="style-m.css">
+	<link rel="stylesheet" href="/css/style-m.css">
 </head>
 
 <body>

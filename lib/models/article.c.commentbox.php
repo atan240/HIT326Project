@@ -11,11 +11,8 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         // var_dump($_POST);
         if (!empty($_POST['comment_body'])) {
             $errors = array();
-            require 'db.php';
-            if (!$db) {
-                require 'db_error.html.php';
-                exit();
-            }
+            require DB;
+ 
             $comment_body = htmlspecialchars($_POST['comment_body'], ENT_QUOTES);
             $article_ID = $_GET['id'];
 
@@ -41,7 +38,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         }
     }
     
-    require PARTIALS . "/article.d.comments.php";
+    require MODELS . "/article.d.comments.php";
     exit();
 }
 ?>
