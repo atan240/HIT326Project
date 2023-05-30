@@ -10,6 +10,7 @@
 		<nav>
 			<ul>
 				<li><a href='?'>Home</a></li>
+				<li><a href="?upload">Upload</a></li>
 				<li><a href="#">Sign Up</a></li>
 				<li><a href="?login">Login</a></li>
 
