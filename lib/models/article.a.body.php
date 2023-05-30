@@ -6,7 +6,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
     if ($statement = $db->prepare("SELECT ac.article_ID, ac.news_title, ac.news_body, ac.news_timestamp, u.user_FN, u.user_LN, ac.image_url 
         FROM article_content ac 
-        JOIN users u on u.user_ID = ac.user_ID
+        LEFT JOIN users u on u.user_ID = ac.user_ID
         WHERE ac.article_ID = ?")) {
 
         // //Value in the binding array specifies the article ID
@@ -27,9 +27,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                 $user_LN = htmlspecialchars($item['user_LN'], ENT_QUOTES, 'UTF-8');
                 $image_url = htmlspecialchars($item['image_url'], ENT_QUOTES, 'UTF-8');
 
-
+                $journalist_name = ($user_FN && $user_LN) ? $user_FN . ' ' . $user_LN : "Unknown author";
                 echo "<article><header><h1>$news_title</h1>";
-                echo "<p class='meta-data'>$user_FN $user_LN  |  $news_timestamp</p></header>";
+                echo "<p class='meta-data'>$journalist_name  |  $news_timestamp</p></header>";
                 echo "<p><center><img src='$image_url'></center></p>";
                 echo "<p>$news_body</p></article>";
             }

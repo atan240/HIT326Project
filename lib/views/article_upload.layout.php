@@ -19,7 +19,7 @@ require PARTIALS . "/site.header.layout.php";
     <div><textarea id="news_body" name="news_body" placeholder="Enter content here" style="height:200px"></textarea></div>
     <div><label for='tags'>Article tags (separate with comma)</label></div>
     <div><input type='text' id='tag_name' name='tag_name' /></div>
-    <div id="error-container"></div> <!-- Error container -->
+    <div id="error-container"></div><br> <!-- Error container -->
     <div><input type='submit' value='Submit article' /></div>
 </form>
     <?php

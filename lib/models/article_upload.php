@@ -8,10 +8,9 @@ if (isset($_POST['_method']) && $_POST['_method'] == 'post') {
         require DB;
 
         $news_title = htmlspecialchars($_POST['news_title'], ENT_QUOTES);
-        $user_id = $_POST['user_id'];
+        $user_id = htmlspecialchars($_POST['user_id'], ENT_QUOTES);
         $image_url = htmlspecialchars($_POST['image_url'], ENT_QUOTES);
         $news_body = htmlspecialchars($_POST['news_body'], ENT_QUOTES);
-        // $tag_name_array = explode(", ", $_POST['tag_name']);
         $tag_name = htmlspecialchars($_POST['tag_name'], ENT_QUOTES);
         $tag_name = str_replace(' ', '', $tag_name); // Remove whitespaces
         $tag_name_array = explode(',', $tag_name);
@@ -42,7 +41,7 @@ if (isset($_POST['_method']) && $_POST['_method'] == 'post') {
                 $statement = $db->prepare($query3);
                 $statement->execute([$tag_name]);
                 $result = $statement->fetch(PDO::FETCH_ASSOC);
-            
+
                 if ($result) {
                     $tagID = $result['tag_ID'];
                     $query4 = "INSERT INTO article_tags (article_ID, tag_ID) VALUES (?, ?)";
@@ -50,12 +49,23 @@ if (isset($_POST['_method']) && $_POST['_method'] == 'post') {
                     $statement->execute([$articleID, $tagID]);
                 }
             }
+            // Attempt at validating if journalist ID input equals to a journalist ID present in the "users" table
+            $query5 = "SELECT user_role FROM users WHERE user_ID = ?";
+            $statement = $db->prepare($query5);
+            $statement->execute([$user_id]);
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
 
+            if ($user && $user['user_role'] !== 'journalist') {
+                $error = "Invalid journalist ID";
+                require VIEWS . '/db_error.html.php';
+                // echo "<script>alert(\"$error\");</script>";
+            }
         } catch (PDOException $e) {
             $errors[] = "Statement error because: {$e->getMessage()}";
             require VIEWS . '/db_error.html.php';
             exit();
         }
+
         header('Location: index.php');
 
         exit();
@@ -65,4 +75,5 @@ if (isset($_POST['_method']) && $_POST['_method'] == 'post') {
         exit();
     }
 }
+
 ?>

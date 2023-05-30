@@ -25,7 +25,12 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         $statement = $db->prepare($query);
         $statement->execute(array($articleID));
         $list = $statement->fetchall(PDO::FETCH_ASSOC);
-        require VIEWS . '/article_body.layout.php';
+        if (empty($list)) {
+            require VIEWS . '/404.php';
+        } else {
+            require VIEWS . '/article_body.layout.php';
+        }
+
     } catch (PDOException $e) {
         $errors[] = "Statement error because: {$e->getMessage()}";
         require 'db_error.html.php';
@@ -65,6 +70,22 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
     exit();
 }
 
-
 //Route to homepage
-require VIEWS . '/site_home.layout.php';
+if (isset($_GET) && !empty($_GET)) {
+    require VIEWS . '/404.php';
+    exit();
+} else {
+    $errors = array();
+    require DB;
+
+    $list = null;
+    try {
+        require VIEWS . '/site_home.layout.php';
+    } catch (PDOException $e) {
+        $errors[] = "Statement error because: {$e->getMessage()}";
+        require VIEWS . '/db_error.html.php';
+        exit();
+    }
+    exit();
+}
+
