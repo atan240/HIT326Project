@@ -38,6 +38,7 @@ require PARTIALS . "/site.header.layout.php";
         <input type='text' id='name' name='name' />
         <label for='password'>Password</label>
         <input type='password' id='password' name='password' />
+        <br> <!-- Add a line break -->
         <input type='submit' value='Sign in' />
     </form>
 <?php
