@@ -1,0 +1,66 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: rgb(235, 9, 9);
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.articles-container {
+    margin-top: 20px;
+}
+
+.article {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.article-image img {
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.article-content {
+    flex-grow: 1;
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #777;
+    margin-bottom: 15px;
+}
