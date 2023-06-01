@@ -1,3 +1,11 @@
+<?php
+
+DEFINE("LIB", $_SERVER['DOCUMENT_ROOT'] . "/lib");
+DEFINE("VIEWS", LIB . "/views");
+DEFINE("MODELS", LIB . "/models");
+DEFINE("PARTIALS", VIEWS . "/partials");
+DEFINE("DB", MODELS . "/db.php");
+
 // Route to homepage
 if (isset($_GET['login'])) {
     require VIEWS . '/login/layout.php';
@@ -65,3 +73,4 @@ if (isset($_GET['login'])) {
     }
     exit();
 }
+?>
