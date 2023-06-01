@@ -49,6 +49,7 @@ $result = $db->query($query);
                 echo "<p>Date: {$article['news_timestamp']}</p>";
                 // echo "<p>Tags: {$article['tags']}</p>";
                 echo "<p>{$article['news_body']}</p>";
+                echo "<a href='http://localhost/index.php?id={$article['article_ID']}'>Read More</a>";
                 echo "</div>";
                 echo "</div>";
             }

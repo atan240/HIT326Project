@@ -6,11 +6,15 @@ DEFINE("MODELS", LIB . "/models");
 DEFINE("PARTIALS", VIEWS . "/partials");
 DEFINE("DB", MODELS . "/db.php");
 
-// Route to homepage
+
+// Route to login page
 if (isset($_GET['login'])) {
-    require VIEWS . '/login/layout.php';
+    require VIEWS . '/login.layout.php';
     exit();
-} elseif (isset($_GET['id']) && !empty($_GET['id'])) {
+}
+
+// Route to article page as defined by article id number
+elseif (isset($_GET['id']) && !empty($_GET['id'])) {
     $errors = array();
     require DB;
 
@@ -22,7 +26,7 @@ if (isset($_GET['login'])) {
         $statement->execute(array($articleID));
         $list = $statement->fetchAll(PDO::FETCH_ASSOC);
         if (empty($list)) {
-            require VIEWS . '/404.php';
+            require VIEWS . '/404.php'; // 404 error if not valid article ID passed (i.e. article id doesn't exits in db)
         } else {
             require VIEWS . '/article_body.layout.php';
         }
@@ -32,7 +36,10 @@ if (isset($_GET['login'])) {
         exit();
     }
     exit();
-} elseif (isset($_GET['upload'])) {
+}
+
+// Route to article upload page
+elseif (isset($_GET['upload'])) {
     $errors = array();
     require DB;
 
@@ -46,7 +53,10 @@ if (isset($_GET['login'])) {
         exit();
     }
     exit();
-} elseif (isset($_GET['search']) && !empty($_GET['search'])) {
+}
+
+// Route to search results page
+elseif (isset($_GET['search']) && !empty($_GET['search'])) {
     $errors = array();
     require DB;
 
@@ -59,7 +69,16 @@ if (isset($_GET['login'])) {
         exit();
     }
     exit();
-} else {
+}
+
+// 404 error page if an invalid url requested
+elseif (isset($_GET) && !empty($_GET)) {
+    require VIEWS . '/404.php';
+    exit();
+}
+
+// Show homepage
+else {
     $errors = array();
     require DB;
 
@@ -73,4 +92,3 @@ if (isset($_GET['login'])) {
     }
     exit();
 }
-?>
