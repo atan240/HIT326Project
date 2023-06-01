@@ -6,7 +6,7 @@
 
 <body>
 	<header>
-		<h1>My News Website</h1>
+		<h1>Northern Australian Times</h1>
 		<nav>
 			<ul>
 				<li><a href='?'>Home</a></li>
