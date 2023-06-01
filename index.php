@@ -1,45 +1,30 @@
-<?php
-
-DEFINE("LIB", $_SERVER['DOCUMENT_ROOT'] . "/lib");
-DEFINE("VIEWS", LIB . "/views");
-DEFINE("MODELS", LIB . "/models");
-DEFINE("PARTIALS", VIEWS . "/partials");
-DEFINE("DB", MODELS . "/db.php");
-
-//Route to login page
+// Route to homepage
 if (isset($_GET['login'])) {
-    // require VIEWS.'/login.layout.php';
-    require VIEWS . '/db_error.html.php';
+    require VIEWS . '/login/layout.php';
     exit();
-}
-
-//Route to article page as defined by article id number
-if (isset($_GET['id']) && !empty($_GET['id'])) {
+} elseif (isset($_GET['id']) && !empty($_GET['id'])) {
     $errors = array();
     require DB;
-    
+
     $list = null;
     try {
         $articleID = $_GET['id']; // Get the 'id' parameter from the URL
         $query = "SELECT article_ID FROM article_content WHERE article_ID = ?";
         $statement = $db->prepare($query);
         $statement->execute(array($articleID));
-        $list = $statement->fetchall(PDO::FETCH_ASSOC);
+        $list = $statement->fetchAll(PDO::FETCH_ASSOC);
         if (empty($list)) {
             require VIEWS . '/404.php';
         } else {
             require VIEWS . '/article_body.layout.php';
         }
-
     } catch (PDOException $e) {
         $errors[] = "Statement error because: {$e->getMessage()}";
         require 'db_error.html.php';
         exit();
     }
     exit();
-}
-
-if (isset($_GET['upload'])) {
+} elseif (isset($_GET['upload'])) {
     $errors = array();
     require DB;
 
@@ -53,9 +38,7 @@ if (isset($_GET['upload'])) {
         exit();
     }
     exit();
-}
-
-if (isset($_GET['search']) && !empty($_GET['search'])) {
+} elseif (isset($_GET['search']) && !empty($_GET['search'])) {
     $errors = array();
     require DB;
 
@@ -67,12 +50,6 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
         require VIEWS . '/db_error.html.php';
         exit();
     }
-    exit();
-}
-
-//Route to homepage
-if (isset($_GET) && !empty($_GET)) {
-    require VIEWS . '/404.php';
     exit();
 } else {
     $errors = array();
@@ -88,4 +65,3 @@ if (isset($_GET) && !empty($_GET)) {
     }
     exit();
 }
-
