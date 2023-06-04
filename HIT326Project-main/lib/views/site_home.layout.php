@@ -1,7 +1,7 @@
 <?php
 
 $hostname = "localhost";  
-$username = "Ben";  
+$username = "root";  
 $password = "";  
 $database = "newspaper_db";  
 
@@ -36,23 +36,6 @@ mysqli_close($connection);
 
     <div class="articles-container">
         <?php
-        // Display the top five newest articles
-        // if ($result->num_rows > 0) {
-        //     while ($article = $result->fetch_assoc()) {
-        //         echo "<div class='article'>";
-        //         echo "<div class='article-image'><img src='{$article['image_url']}' alt='Article Image'></div>";
-        //         echo "<div class='article-content'>";
-        //         echo "<h2>{$article['title']}</h2>";
-        //         echo "<p>Journalist: {$article['username']}</p>";
-        //         echo "<p>Date: {$article['created_at']}</p>";
-        //         echo "<p>Tags: {$article['tags']}</p>";
-        //         echo "<p>{$article['content']}</p>";
-        //         echo "</div>";
-        //         echo "</div>";
-        //     }
-        // } else {
-        //     echo "No articles found.";
-        // }
         if (!empty($result)) {
             foreach ($result as $article) {
                 echo "<div class='article'>";
@@ -61,7 +44,6 @@ mysqli_close($connection);
                 echo "<h2>{$article['news_title']}</h2>";
                 echo "<p>Journalist: {$article['user_ID']}</p>";
                 echo "<p>Date: {$article['news_timestamp']}</p>";
-                // echo "<p>Tags: {$article['tags']}</p>";
                 echo "<p>{$article['news_body']}</p>";
                 echo "<a href='http://localhost/index.php?id={$article['article_ID']}'>Read More</a>";
                 echo "</div>";

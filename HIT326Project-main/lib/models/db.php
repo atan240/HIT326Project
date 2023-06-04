@@ -3,7 +3,7 @@ $db = null;
 
 $host = "localhost";
 $dbname = "newspaper_db";
-$username = "Ben";
+$username = "root";
 $password = "";
 
 try{

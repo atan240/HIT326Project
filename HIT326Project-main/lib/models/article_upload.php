@@ -70,7 +70,6 @@ if (isset($_POST['_method']) && $_POST['_method'] == 'post') {
 
         exit();
     } else {
-        // header('Location: index.php?upload');
         require VIEWS . '/db_error.html.php';
         exit();
     }

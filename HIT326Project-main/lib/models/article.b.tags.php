@@ -5,8 +5,6 @@
 if ($statement = $db->prepare("SELECT tags.tag_name FROM article_content JOIN article_tags ON article_content.article_ID = article_tags.article_ID JOIN tags ON article_tags.tag_ID = tags.tag_ID WHERE article_content.article_ID = ?")) {
 
     //Value in the binding array specifies the article ID
-    // $binding = array('17');
-
     $statement->execute($articleID);
 
     $result = $statement->fetchall(PDO::FETCH_ASSOC);

@@ -10,9 +10,6 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         WHERE ac.article_ID = ?")) {
 
         // //Value in the binding array specifies the article ID
-        // $binding = array('17'); //'id'?
-        // $statement->execute($binding);
-
         $articleID = array($_GET['id']); //'id'?
         $statement->execute($articleID);
         $result = $statement->fetchall(PDO::FETCH_ASSOC);

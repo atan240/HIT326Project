@@ -1,4 +1,4 @@
-<!-- Show comments for specific article -->
+<!-- Shows the comments for a specific article -->
 
 <?php
 //Select statement retrieves the comment and timestamp of the comment from the "comments" table and the username  from the "users" table
@@ -11,10 +11,6 @@ WHERE c.article_ID = ?
 ")) {
 
         // //Value in the binding array specifies the article ID
-        // $binding = array('17'); //'id'?
-        // $statement->execute($binding);
-
-        // $articleID = $_GET['id']; 
         $statement->execute(array($articleID));
         $result = $statement->fetchall(PDO::FETCH_ASSOC);
 

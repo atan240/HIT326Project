@@ -2,7 +2,7 @@
 require PARTIALS . "/site.header.layout.php";
 
 session_start();
-include "db.php";
+include MODELS . "/db.php";
 
 // Check if the user is already logged in
 if (isset($_SESSION['user_id'])) {
